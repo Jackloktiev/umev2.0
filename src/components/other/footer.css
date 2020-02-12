@@ -1,0 +1,13 @@
+.Footer{
+    width: 100%;
+    height: 10vh;
+    background-color: mediumslateblue;
+    color: oldlace;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+p{
+    font-size: 0.7rem;
+}

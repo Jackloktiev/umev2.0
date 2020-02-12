@@ -1,0 +1,16 @@
+.LoginDiv{
+    margin: 50px auto;
+    border: 1px solid black;
+    width:80%;
+    padding:1%;
+}
+
+.loginInput{
+    display:block;
+    margin-bottom: 2%;
+}
+
+.loginBtn{
+    margin:10px;
+    
+}

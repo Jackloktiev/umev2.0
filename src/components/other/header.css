@@ -1,0 +1,11 @@
+.Header{
+    width: 100%;
+    height: 20vh;
+    background-color: mediumslateblue;
+    color: oldlace;
+    margin: 0;
+    padding: 10px;
+}
+h1{
+    font-size: 1.3rem;
+}
