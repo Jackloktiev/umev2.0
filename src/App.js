@@ -13,6 +13,7 @@ import Welcome from "./components/welcome";
 function App() {
   // Token State
   const [token, setToken] = useState();
+ 
   const getToken = (token) => {
     setToken(token);
   }
@@ -29,6 +30,8 @@ function App() {
     totalFats: 0,
     totalProteins: 0
   });
+
+
   //Fetch userData from the server
   useEffect(() => {
     if (token) {
@@ -41,11 +44,16 @@ function App() {
     }
   }, [token, chartUpdate]);
 
+
+
+  //If user profile is not completed yet - there are no norms and charts show the mess
+  //If user profile is not completed instead of charts show prompt to complete the profile - normSet prop
   const Display = token ?
     <MainContent
       userData={userData}
       token={token}
       setChartUpdate={setChartUpdate}
+      normsSet = {userData.normCalories > 0.01? true: false}
     /> :
     <Login tokenTransfer={getToken} />
 
@@ -57,7 +65,7 @@ function App() {
           <Switch>
             <Route path="/" component={Welcome} exact />
             <Route path="/login" render={()=><Login tokenTransfer={getToken} />} />
-            <Route path="/userprofile" component={UserProfile} />
+            <Route path="/user-profile" component={UserProfile} />
             <Route path="/app" render={() => Display} />
             <Route path="/register" component={Register} />
           </Switch>

@@ -5,7 +5,7 @@ function Footer (){
     let year = new Date().getFullYear();
     return(
         <div className = "Footer" >
-            <p>Jack Loktiev &copy; {year}</p>
+            <p className = "footerText">Jack Loktiev &copy; {year}</p>
         </div>
 )}
 
