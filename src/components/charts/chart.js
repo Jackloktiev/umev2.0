@@ -20,9 +20,9 @@ function Chart(props) {
 
     const style = {
         textColor:"white",
-        backgroundCol:"darkcyan",
+        backgroundCol:"#2e279d",
         lineColor:"firebrick",
-        barColor:"goldenrod"
+        barColor:"#dff6f0"
     }
 
     return (
@@ -31,7 +31,7 @@ function Chart(props) {
             <VictoryChart
                 domainPadding={10}
                 style={{
-                    parent: { backgroundColor: style.backgroundCol, borderRadius: "5px" }
+                    parent: { backgroundColor: style.backgroundCol}
                 }}
             >
 
