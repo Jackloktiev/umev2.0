@@ -34,7 +34,7 @@ function UserProfile(props){
     const submitClickHandler = (event)=>{
         event.preventDefault();
         const data = {
-            username:"jack.loktiev@gmail.com",
+            username:props.username,
             name:name,
             gender:gender,
             age:age,
@@ -63,7 +63,7 @@ function UserProfile(props){
                <form action = "/userProfile" method = "POST" >
                    <h3>We need your body parameters to define your consumption norms</h3>
                    <label>User name</label>
-                   <input type = "text" value = "Jack" className = "loginInput" readOnly name = "username"></input>
+                   <input type = "text" value = {props.username} className = "loginInput" readOnly name = "username"></input>
                    <label>Name - how should we call you</label>
                    <input type = "text" placeholder = "Name" className = "loginInput" name = "name" value = {name} onChange={changeHandler} ></input>
                    <label>Gender</label>

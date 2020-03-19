@@ -35,7 +35,7 @@ function App() {
   //Fetch userData from the server
   useEffect(() => {
     if (token) {
-      fetch("/userData?token=" + token)
+      fetch("/userData?token=" + token.token)
         .then(response => {
           return response.json();
         }).then(result => {
@@ -51,7 +51,7 @@ function App() {
   const Display = token ?
     <MainContent
       userData={userData}
-      token={token}
+      token={token.token}
       setChartUpdate={setChartUpdate}
       normsSet = {userData.normCalories > 0.01? true: false}
     /> :
@@ -65,7 +65,7 @@ function App() {
           <Switch>
             <Route path="/" component={Welcome} exact />
             <Route path="/login" render={()=><Login tokenTransfer={getToken} />} />
-            <Route path="/user-profile" component={UserProfile} />
+            <Route path="/user-profile" render={()=><UserProfile username = {token.username} />}/>
             <Route path="/app" render={() => Display} />
             <Route path="/register" component={Register} />
           </Switch>
