@@ -11,12 +11,12 @@ import Welcome from "./components/welcome";
 
 
 function App() {
-  // Token State
-  const [token, setToken] = useState();
- 
-  const getToken = (token) => {
-    setToken(token);
-  }
+
+  const [token,setToken] = useState(window.sessionStorage.token);
+  //the app takes the value of a token from window.sessionStorage. This state is used to make fetch within useEffect run when new token is available.
+  const getToken = (tokenValue)=>{
+    setToken(tokenValue);
+  };
 
   // Charts State
   const [chartUpdate, setChartUpdate] = useState(0);
@@ -34,28 +34,27 @@ function App() {
 
   //Fetch userData from the server
   useEffect(() => {
-    if (token) {
-      fetch("/userData?token=" + token.token)
+      if(token){
+        fetch("/userData?token=" + window.sessionStorage.token)
         .then(response => {
           return response.json();
         }).then(result => {
           setUserData(result);
         })
-    }
-  }, [token, chartUpdate]);
+      }  
+  }, [chartUpdate, token]);
 
 
 
   //If user profile is not completed yet - there are no norms and charts show the mess
   //If user profile is not completed instead of charts show prompt to complete the profile - normSet prop
-  const Display = token ?
-    <MainContent
-      userData={userData}
-      token={token.token}
-      setChartUpdate={setChartUpdate}
-      normsSet = {userData.normCalories > 0.01? true: false}
-    /> :
-    <Login tokenTransfer={getToken} />
+  const MainScreen = <MainContent
+                        userData={userData}
+                        token={window.sessionStorage.token}
+                        setChartUpdate={setChartUpdate}
+                        normsSet = {userData.normCalories > 0.01? true: false}
+                      /> 
+  const LoginScreen = <Login tokenTransfer={getToken} /> // tokenTransfer={getToken}
 
   return (
     <>
@@ -64,9 +63,9 @@ function App() {
         <div className="Chart">
           <Switch>
             <Route path="/" component={Welcome} exact />
-            <Route path="/login" render={()=><Login tokenTransfer={getToken} />} />
-            <Route path="/user-profile" render={()=><UserProfile username = {token.username} />}/>
-            <Route path="/app" render={() => Display} />
+            <Route path="/login" render={()=><Login tokenTransfer={getToken}/>} />
+            <Route path="/user-profile" render={()=><UserProfile username = "Vasya" />}/>
+            <Route path="/app" render={() => window.sessionStorage.token?MainScreen:LoginScreen} />
             <Route path="/register" component={Register} />
           </Switch>
 

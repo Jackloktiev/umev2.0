@@ -32,7 +32,7 @@ function Login(props) {
         }).then(response=>{
             return response.json();
         }).then(result=>{
-            console.log(result.token);
+            window.sessionStorage.setItem("token",result.token.token);
             props.tokenTransfer(result.token);
             props.history.push("/app");
         })
