@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import { withRouter } from 'react-router-dom';
+import Menu from "../menu/menu";
 
 function UserProfile(props){
 
-    const [name, setName] = useState("");
-    const [gender, setGender] = useState("female");
-    const [age, setAge] = useState("");
-    const [height, setHeight] = useState("");
-    const [weight, setWeight] = useState("");
-    const [activity, setActivity] = useState("moderate");
+    const [name, setName] = useState(props.data.name||"");
+    const [gender, setGender] = useState(props.data.gender||"female");
+    const [age, setAge] = useState(props.data.age||"");
+    const [height, setHeight] = useState(props.data.height||"");
+    const [weight, setWeight] = useState(props.data.weight||"");
+    const [activity, setActivity] = useState(props.data.levelOfActivity||"moderate");
 
     // Handle changes in form fields
     const changeHandler = (event)=>{
@@ -52,7 +53,7 @@ function UserProfile(props){
         }).then(response=>{
             return response.text();
         }).then(result=>{
-            console.log(result);
+            props.setChartUpdate(Math.random());
             props.history.push("/app");
         })
     }
@@ -60,6 +61,7 @@ function UserProfile(props){
     return(
        <div>
            <div className = "setUserData">
+               <Menu/>
                <form action = "/userProfile" method = "POST" >
                    <h3>We need your body parameters to define your consumption norms</h3>
                    <label>User name</label>

@@ -8,6 +8,7 @@ import Login from "./components/auth/login";
 import UserProfile from "./components/auth/userprofile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Welcome from "./components/welcome";
+import History from "./components/history/history";
 
 
 function App() {
@@ -64,9 +65,10 @@ function App() {
           <Switch>
             <Route path="/" component={Welcome} exact />
             <Route path="/login" render={()=><Login tokenTransfer={getToken}/>} />
-            <Route path="/user-profile" render={()=><UserProfile username = "Vasya" />}/>
+            <Route path="/user-profile" render={()=><UserProfile username = {window.sessionStorage.username} setChartUpdate = {setChartUpdate} data = {userData}/>}/>
             <Route path="/app" render={() => window.sessionStorage.token?MainScreen:LoginScreen} />
             <Route path="/register" component={Register} />
+            <Route path="/history" render={()=><History setChartUpdate = {setChartUpdate} chartUpdate = {chartUpdate}/>} />
           </Switch>
 
         </div>
